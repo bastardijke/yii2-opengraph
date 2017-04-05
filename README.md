@@ -107,6 +107,16 @@ The type of object this page will appear on social media. Defaults to `article`.
 
 When the object was last updated. Optional.
 
+#### See also
+`Yii::$app->opengraph->see_also`
+
+An array of URLs of related resources.
+
+#### TTL
+`Yii::$app->opengraph->ttl`
+
+Seconds until this page should be re-scraped. Use this to rate limit the Facebook content crawlers. The minimum allowed value is 345600 seconds (4 days); if you set a lower value, the minimum will be used. If you do not include this tag, the ttl will be computed from the "Expires" header returned by your web server, otherwise it will default to 7 days.
+
 #### Locale
 `Yii::$app->opengraph->locale`
 

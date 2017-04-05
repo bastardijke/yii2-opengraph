@@ -17,6 +17,8 @@ class OpenGraph {
 	public $determiner;
 	public $updated_time;
 	public $restrictions;
+	public $see_also;
+	public $ttl;
 	
 	public function __construct(){
 		// Load default values
@@ -32,7 +34,9 @@ class OpenGraph {
 		$this->audio = [];
 		$this->video = [];
 		$this->restrictions = [];
-		$this->fb_app_id = null;		
+		$this->fb_app_id = null;
+		$this->see_also = null;
+		$this->ttl = 604800;
 		
 		// Twitter Card
 		$this->twitter = new TwitterCard;
@@ -45,6 +49,7 @@ class OpenGraph {
 			Yii::$app->controller->view->registerMetaTag(['property'=>'og:site_name', 'content'=>$this->site_name], 'og:site_name');
 			Yii::$app->controller->view->registerMetaTag(['property'=>'og:url', 'content'=>$this->url], 'og:url');
 			Yii::$app->controller->view->registerMetaTag(['property'=>'og:type', 'content'=>$this->type], 'og:type');
+			Yii::$app->controller->view->registerMetaTag(['property'=>'og:ttl', 'content'=>$this->ttl], 'og:ttl');
 			
 			// Locale issafe to be specifued since it has default value on Yii applications
 			Yii::$app->controller->view->registerMetaTag(['property'=>'og:locale', 'content'=>$this->locale], 'og:locale');
@@ -60,7 +65,12 @@ class OpenGraph {
 			}
 
 			// Only add a fb:app_id meta if specified
-			if($this->description!==null){
+			if($this->see_also!==null){
+				Yii::$app->controller->view->registerMetaTag(['property'=>'og:see_also', 'content'=>$this->see_also], 'og:see_also');
+			}
+
+			// Only add a fb:app_id meta if specified
+			if($this->fb_app_id!==null){
 				Yii::$app->controller->view->registerMetaTag(['property'=>'fb:app_id', 'content'=>$this->fb_app_id], 'fb:app_id');
 			}
 			
