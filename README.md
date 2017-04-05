@@ -68,6 +68,12 @@ This is the title that shows up on social sharing. In contrast to the view title
 
 e.g. "*MySite.com - Blog - Hello world!*" should just be "*Hello World!*"
 
+
+#### Determiner
+`Yii::$app->opengraph->determiner`
+	
+The word that appears before the object in a story (such as "an Omelette"). This value should be a string that is a member of the Enum {a, an, the, "", auto}. When 'auto' is selected, Facebook will choose between 'a' or 'an'. Default is blank.
+
 #### Site Name
 `Yii::$app->opengraph->site_name`
 
@@ -96,6 +102,11 @@ Description of the current page. Optional but recommended for best results in so
 
 The type of object this page will appear on social media. Defaults to `article`.
 
+#### Updated Time
+`Yii::$app->opengraph->updated_time`
+
+When the object was last updated. Optional.
+
 #### Locale
 `Yii::$app->opengraph->locale`
 
@@ -116,6 +127,17 @@ array [
 
 Image for the graph object. This is highly recommended for best results when shared onto the social media. For best results in Facebook, make this at least `600x315px`
 
+#### Audio
+`Yii::$app->opengraph->audio`
+
+```
+array [
+    'url' => 'http://example.com/audio.mp3',
+    'secure_url' => 'https://secure.example.com/audio.mp3',
+    'type' => 'audio/mp3',
+]
+```
+
 #### Video
 `Yii::$app->opengraph->video`
 
@@ -128,3 +150,20 @@ array [
     'height' => '300',   
 ]
 ```
+
+#### Restrictions
+`Yii::$app->opengraph->restrictions`
+
+```
+array [
+    ':country:allowed' => 'US',
+    ':country:disallowed' => 'CN', // *Note you can only have one :allowed or one :disallowed instance in the markup.
+    'age' => '18+', // An age restriction for the object
+    'content' => 'alcohol', // A content restriction for the object, such as 'alcohol' (the only currently supported value)
+]
+```
+
+#### Facebook App ID
+`Yii::$app->opengraph->fb_app_id`
+
+In order to use [Facebook Domain Insights](https://developers.facebook.com/docs/platforminsights/domains) you must add the app ID to your page. Domain Insights lets you view analytics for traffic to your site from Facebook. Find the app ID in your [App Dashboard](https://developers.facebook.com/apps/redirect/dashboard).
