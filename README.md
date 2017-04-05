@@ -106,12 +106,25 @@ The type of object this page will appear on social media. Defaults to `article`.
 
 ```
 array [
-    'url' => 'http://your.site/image.png',
-	'secure_url' => 'https://secure.your.site/image.png',
+    'url' => 'http://example.com/image.png',
+    'secure_url' => 'https://secure.example.com/image.png',
     'type' => 'image/png',
-	'width' => '600',
-	'height' => '315',   
+    'width' => '600',
+    'height' => '315',   
 ]
 ```
 
 Image for the graph object. This is highly recommended for best results when shared onto the social media. For best results in Facebook, make this at least `600x315px`
+
+#### Video
+`Yii::$app->opengraph->video`
+
+```
+array [
+    'url' => 'http://example.com/movie.swf',
+    'secure_url' => 'https://secure.example.com/movie.swf',
+    'type' => 'application/x-shockwave-flash',
+    'width' => '400',
+    'height' => '300',   
+]
+```

@@ -11,6 +11,7 @@ class OpenGraph {
 	public $type;
 	public $locale;
 	public $image;
+	public $video;
 	
 	public function __construct(){
 		// Load default values
@@ -21,6 +22,7 @@ class OpenGraph {
 		$this->type = 'article';
 		$this->locale = str_replace('-','_',Yii::$app->language);
 		$this->image = [];
+		$this->video = [];
 		
 		// Twitter Card
 		$this->twitter = new TwitterCard;
@@ -42,12 +44,19 @@ class OpenGraph {
 			}
 			
 			// Only add an image meta if specified
-			if( !empty( $this->image && is_array( $this->image ) ) {
+			if( !empty( $this->image ) && is_array( $this->image ) ) {
 				foreach ( $this->image as $key => $value) {
 					Yii::$app->controller->view->registerMetaTag(['property'=>'og:image:'.$key, 'content'=>$value], 'og:image:'.$key);
 				}
 			}
 			
+			// Only add a video meta if specified
+			if( !empty( $this->video ) && is_array( $this->video ) ) {
+				foreach ( $this->video as $key => $value) {
+					Yii::$app->controller->view->registerMetaTag(['property'=>'og:video:'.$key, 'content'=>$value], 'og:video:'.$key);
+				}
+			}
+
 			$this->twitter->registerTags();
 		});
 	}
