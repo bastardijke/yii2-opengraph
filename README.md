@@ -104,4 +104,14 @@ The type of object this page will appear on social media. Defaults to `article`.
 #### Image
 `Yii::$app->opengraph->image`
 
+```
+array [
+    'url' => 'http://your.site/image.png',
+	'secure_url' => 'https://secure.your.site/image.png',
+    'type' => 'image/png',
+	'width' => '600',
+	'height' => '315',   
+]
+```
+
 Image for the graph object. This is highly recommended for best results when shared onto the social media. For best results in Facebook, make this at least `600x315px`

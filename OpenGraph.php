@@ -20,7 +20,7 @@ class OpenGraph {
 		$this->description = null;
 		$this->type = 'article';
 		$this->locale = str_replace('-','_',Yii::$app->language);
-		$this->image = null;
+		$this->image = [];
 		
 		// Twitter Card
 		$this->twitter = new TwitterCard;
@@ -42,8 +42,10 @@ class OpenGraph {
 			}
 			
 			// Only add an image meta if specified
-			if($this->image!==null){
-				Yii::$app->controller->view->registerMetaTag(['property'=>'og:image', 'content'=>$this->image], 'og:image');
+			if( !empty( $this->image && is_array( $this->image ) ) {
+				foreach ( $this->image as $key => $value) {
+					Yii::$app->controller->view->registerMetaTag(['property'=>'og:image:'.$key, 'content'=>$value], 'og:image:'.$key);
+				}
 			}
 			
 			$this->twitter->registerTags();
