@@ -6,6 +6,12 @@ Open Graph implementation for Yii 2 which adds valid meta tags to your HTML outp
 'components' => [
 	'opengraph' => [
 		'class' => 'dragonjet\opengraph\OpenGraph',
+        'title' => 'My_Article',
+        'description' => 'My_Article_Description',
+        'image' => [
+            'url' => '@web/images/image-for-my-article.png',
+        ],
+        //....
 	],
 	//....
 ],
@@ -18,7 +24,7 @@ The following codes must be used on controller actions before rendering the view
 ```
 Yii::$app->opengraph->title = 'My_Article';
 Yii::$app->opengraph->description = 'My_Article_Description';
-Yii::$app->opengraph->image = 'http://image.for.my/article';
+Yii::$app->opengraph->image = [ 'url' => '@web/images/image-for-my-article.png', ];
 return $this->render('My_View_Name');
 ```
 
@@ -36,7 +42,7 @@ return $this->render('My_View_Name');
 ```
 Yii::$app->opengraph->title = 'My_Article';
 Yii::$app->opengraph->description = 'My_Article_Description';
-Yii::$app->opengraph->image = 'http://image.for.my/article';
+Yii::$app->opengraph->image = [ 'url' => '@web/images/image-for-my-article.png', ];
 Yii::$app->opengraph->twitter->card = 'summary';
 Yii::$app->opengraph->twitter->site = 'My_Site_Twitter_Username';
 Yii::$app->opengraph->twitter->creator = 'Author_Username';
@@ -166,8 +172,8 @@ array [
 
 ```
 array [
-    ':country:allowed' => 'US',
-    ':country:disallowed' => 'CN', // *Note you can only have one :allowed or one :disallowed instance in the markup.
+    'country:allowed' => 'US', // array of countries
+    'country:disallowed' => 'CN', // *Note you can only have one :allowed or one :disallowed instance in the markup.
     'age' => '18+', // An age restriction for the object
     'content' => 'alcohol', // A content restriction for the object, such as 'alcohol' (the only currently supported value)
 ]

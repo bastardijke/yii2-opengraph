@@ -2,8 +2,10 @@
 namespace dragonjet\opengraph;
 use Yii;
 use yii\web\View;
+use yii\helpers\Url;
 
 class OpenGraph {
+
 	public $title;
 	public $site_name;
 	public $url;
@@ -11,6 +13,7 @@ class OpenGraph {
 	public $type;
 	public $locale;
 	public $image;
+	public $twitter;
 	public $video;
 	public $audio;	
 	public $fb_app_id;
@@ -21,22 +24,23 @@ class OpenGraph {
 	public $ttl;
 	
 	public function __construct(){
+
 		// Load default values
-		$this->title = Yii::$app->name;
-		$this->site_name = Yii::$app->name;
-		$this->url = Yii::$app->request->absoluteUrl;
-		$this->description = null;
-		$this->type = 'article';
-		$this->determiner = '';
-		$this->updated_time = null;
-		$this->locale = str_replace('-','_',Yii::$app->language);
-		$this->image = [];
-		$this->audio = [];
-		$this->video = [];
-		$this->restrictions = [];
-		$this->fb_app_id = null;
-		$this->see_also = null;
-		$this->ttl = 604800;
+		$this->title = ($this->title) ? : Yii::$app->name;
+		$this->site_name = ($this->site_name) ? : Yii::$app->name;
+		$this->url = ($this->url) ? : Yii::$app->request->absoluteUrl;
+		$this->description = ($this->description) ? : null;
+		$this->type = ($this->type) ? : 'article';
+		$this->determiner = ($this->determiner) ? : '';
+		$this->updated_time = ($this->updated_time) ? : null;
+		$this->locale = ($this->locale) ? : str_replace('-','_',Yii::$app->language);
+		$this->image = ($this->image) ? : [];
+		$this->audio = ($this->audio) ? : [];
+		$this->video = ($this->video) ? : [];
+		$this->restrictions = ($this->restrictions) ? : [];
+		$this->fb_app_id = ($this->fb_app_id) ? : null;
+		$this->see_also = ($this->see_also) ? : null;
+		$this->ttl = ($this->ttl) ? : 604800;
 		
 		// Twitter Card
 		$this->twitter = new TwitterCard;
@@ -77,6 +81,8 @@ class OpenGraph {
 			// Only add an image meta if specified
 			if( !empty( $this->image ) && is_array( $this->image ) ) {
 				foreach ( $this->image as $key => $value) {
+					if ( $key == 'url' ) { $value = Url::to( $value , true ); }
+					if ( $key == 'secure_url' ) { $value = Url::to( $value , 'https' ); }
 					Yii::$app->controller->view->registerMetaTag(['property'=>'og:image:'.$key, 'content'=>$value], 'og:image:'.$key);
 				}
 			}
@@ -84,6 +90,8 @@ class OpenGraph {
 			// Only add a audio meta if specified
 			if( !empty( $this->audio ) && is_array( $this->audio ) ) {
 				foreach ( $this->audio as $key => $value) {
+					if ( $key == 'url' ) { $value = Url::to( $value , true ); }
+					if ( $key == 'secure_url' ) { $value = Url::to( $value , 'https' ); }
 					Yii::$app->controller->view->registerMetaTag(['property'=>'og:audio:'.$key, 'content'=>$value], 'og:audio:'.$key);
 				}
 			}
@@ -91,6 +99,8 @@ class OpenGraph {
 			// Only add a video meta if specified
 			if( !empty( $this->video ) && is_array( $this->video ) ) {
 				foreach ( $this->video as $key => $value) {
+					if ( $key == 'url' ) { $value = Url::to( $value , true ); }
+					if ( $key == 'secure_url' ) { $value = Url::to( $value , 'https' ); }
 					Yii::$app->controller->view->registerMetaTag(['property'=>'og:video:'.$key, 'content'=>$value], 'og:video:'.$key);
 				}
 			}
