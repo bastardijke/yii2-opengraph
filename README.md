@@ -4,16 +4,14 @@ Open Graph implementation for Yii 2 which adds valid meta tags to your HTML outp
 ## Configuration
 ```
 'components' => [
-	'opengraph' => [
-		'class' => 'dragonjet\opengraph\OpenGraph',
+    'opengraph' => [
+        'class' => 'dragonjet\opengraph\OpenGraph',
         'title' => 'My_Article',
         'description' => 'My_Article_Description',
-        'image' => [
-            'url' => '@web/images/image-for-my-article.png',
-        ],
+        'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
         //....
-	],
-	//....
+    ],
+    //....
 ],
 ```
 
@@ -33,7 +31,7 @@ return $this->render('My_View_Name');
 Yii::$app->opengraph->set([
 	'title' => 'My_Article',
 	'description' => 'My_Article_Description',
-	'image' => 'http://image.for.my/article',
+	'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
 ]);
 return $this->render('My_View_Name');
 ```
@@ -53,7 +51,7 @@ or
 Yii::$app->opengraph->set([
 	'title' => 'My_Article',
 	'description' => 'My_Article_Description',
-	'image' => 'http://image.for.my/article',
+	'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
 	'twitter' => [
 		'card' => 'summary',
 		'site' => 'My_Site_Twitter_Username',
