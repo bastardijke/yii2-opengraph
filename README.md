@@ -29,9 +29,9 @@ return $this->render('My_View_Name');
 ### Usage via Array
 ```
 Yii::$app->opengraph->set([
-	'title' => 'My_Article',
-	'description' => 'My_Article_Description',
-	'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
+    'title' => 'My_Article',
+    'description' => 'My_Article_Description',
+    'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
 ]);
 return $this->render('My_View_Name');
 ```
@@ -49,14 +49,14 @@ return $this->render('My_View_Name');
 or
 ```
 Yii::$app->opengraph->set([
-	'title' => 'My_Article',
-	'description' => 'My_Article_Description',
-	'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
-	'twitter' => [
-		'card' => 'summary',
-		'site' => 'My_Site_Twitter_Username',
-		'creator' => 'Author_Username',
-	],
+    'title' => 'My_Article',
+    'description' => 'My_Article_Description',
+    'image' => [ 'url' => '@web/images/image-for-my-article.png', ],
+    'twitter' => [
+        'card' => 'summary',
+        'site' => 'My_Site_Twitter_Username',
+        'creator' => 'Author_Username',
+    ],
 ]);
 return $this->render('My_View_Name');
 ```
@@ -86,7 +86,7 @@ The word that appears before the object in a story (such as "an Omelette"). This
 ```
 return [
     'id' => 'yiiappid',
-	'name' => 'My Website',
+    'name' => 'My Website',
     //....
 ]
 ```

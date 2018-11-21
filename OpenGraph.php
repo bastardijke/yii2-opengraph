@@ -79,12 +79,20 @@ class OpenGraph {
 			}
 			
 			// Only add an image meta if specified
-			if( !empty( $this->image ) && is_array( $this->image ) ) {
-				foreach ( $this->image as $key => $value) {
-					if ( $key == 'url' ) { $value = Url::to( $value , true ); }
-					if ( $key == 'secure_url' ) { $value = Url::to( $value , 'https' ); }
-					Yii::$app->controller->view->registerMetaTag(['property'=>'og:image:'.$key, 'content'=>$value], 'og:image:'.$key);
-				}
+			if( !empty( $this->image ) ) {
+				if ( is_array( $this->image ) ) {
+					foreach ( $this->image as $key => $value) {
+						if ( $key == 'url' ) { 
+							$value = Url::to( $value , true );
+							Yii::$app->controller->view->registerMetaTag(['property'=>'og:image', 'content'=>$value], 'og:image');
+						}
+						if ( $key == 'secure_url' ) {
+							$value = Url::to( $value , 'https' );
+							Yii::$app->controller->view->registerMetaTag(['property'=>'og:image', 'content'=>$value], 'og:image');
+						}
+						Yii::$app->controller->view->registerMetaTag(['property'=>'og:image:'.$key, 'content'=>$value], 'og:image:'.$key);
+					}
+				} else { Yii::$app->controller->view->registerMetaTag(['property'=>'og:image', 'content'=>$this->image], 'og:image'); }
 			}
 
 			// Only add a audio meta if specified
